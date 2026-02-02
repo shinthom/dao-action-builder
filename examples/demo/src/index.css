@@ -96,32 +96,6 @@ h1 {
   margin-top: 4px;
 }
 
-.tabs {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 20px;
-}
-
-.tab {
-  padding: 10px 20px;
-  border: none;
-  background: #eee;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  transition: all 0.2s;
-}
-
-.tab:hover {
-  background: #ddd;
-}
-
-.tab.active {
-  background: #4a6cf7;
-  color: white;
-}
-
 .params-table {
   width: 100%;
   border-collapse: collapse;
@@ -247,11 +221,6 @@ h1 {
   color: #721c24;
 }
 
-.status.proxy {
-  background: #d1ecf1;
-  color: #0c5460;
-}
-
 .row {
   display: flex;
   gap: 16px;
@@ -277,20 +246,6 @@ h1 {
   height: 1px;
   background: #eee;
   margin: 20px 0;
-}
-
-.config-section {
-  background: #fffbf0;
-  border: 1px solid #ffe0a0;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 20px;
-}
-
-.config-section h3 {
-  font-size: 14px;
-  color: #856404;
-  margin-bottom: 12px;
 }
 
 .predefined-grid {
@@ -353,4 +308,10 @@ h1 {
   font-family: monospace;
   font-size: 13px;
   word-break: break-all;
+}
+
+.error-text {
+  font-size: 12px;
+  color: #e74c3c;
+  margin-top: 4px;
 }

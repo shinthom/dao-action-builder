@@ -1,18 +1,4 @@
 /**
- * Configuration for the action builder
- */
-export interface ActionBuilderConfig {
-  etherscan: {
-    apiKey: string;
-    apiUrl?: string;
-    chainId: number;
-  };
-  rpc?: {
-    url: string;
-  };
-}
-
-/**
  * Represents a DAO proposal action
  */
 export interface Action {
@@ -104,16 +90,6 @@ export type Result<T, E = Error> =
   | { success: false; error: E };
 
 /**
- * ABI loading result
- */
-export interface LoadAbiResult {
-  proxyAbi: AbiFunction[];
-  logicAbi: AbiFunction[];
-  implementationAddress?: string;
-  isProxy: boolean;
-}
-
-/**
  * Calldata encoding result
  */
 export interface EncodeCalldataResult {
@@ -136,6 +112,7 @@ export interface DecodeCalldataResult {
  */
 export interface BuildActionInput {
   contractAddress: string;
+  abi: AbiFunction[];
   functionSignature: string;
   parameters: { [key: string]: string | ParameterValue };
   value?: bigint;
@@ -149,15 +126,6 @@ export interface PredefinedMethod {
   name: string;
   description?: string;
   abi: AbiFunction[];
-}
-
-/**
- * Etherscan API response
- */
-export interface EtherscanResponse {
-  status: string | number;
-  message: string;
-  result: string;
 }
 
 /**
@@ -176,13 +144,8 @@ export class ActionBuilderError extends Error {
 
 export enum ActionBuilderErrorCode {
   INVALID_ADDRESS = 'INVALID_ADDRESS',
-  INVALID_API_KEY = 'INVALID_API_KEY',
-  CONTRACT_NOT_FOUND = 'CONTRACT_NOT_FOUND',
-  ABI_FETCH_FAILED = 'ABI_FETCH_FAILED',
   INVALID_PARAMETER = 'INVALID_PARAMETER',
   ENCODING_FAILED = 'ENCODING_FAILED',
   DECODING_FAILED = 'DECODING_FAILED',
   FUNCTION_NOT_FOUND = 'FUNCTION_NOT_FOUND',
-  NETWORK_ERROR = 'NETWORK_ERROR',
-  RPC_ERROR = 'RPC_ERROR',
 }

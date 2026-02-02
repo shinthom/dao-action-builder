@@ -2,7 +2,7 @@ import { Interface } from 'ethers';
 import type { AbiFunction, DecodeCalldataResult, ParameterValue, Result } from '../types';
 import { ActionBuilderError, ActionBuilderErrorCode } from '../types';
 import { denormalizeParameterValue } from '../validation/normalizers';
-import { getFunctionSignature } from './abi-loader';
+import { getFunctionSignature } from './abi-utils';
 
 /**
  * Decode calldata using a known ABI

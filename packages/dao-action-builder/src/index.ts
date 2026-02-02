@@ -1,34 +1,30 @@
 // Types
 export type {
-  ActionBuilderConfig,
   Action,
   AbiFunction,
   AbiParameter,
   SolidityType,
+  SolidityBaseType,
   ParsedType,
   ParameterValue,
   ParameterValidationResult,
   Result,
-  LoadAbiResult,
   EncodeCalldataResult,
   DecodeCalldataResult,
   BuildActionInput,
   PredefinedMethod,
-  EtherscanResponse,
 } from './types';
 
 export { ActionBuilderError, ActionBuilderErrorCode } from './types';
 
-// Core - ABI Loader
+// Core - ABI Utilities
 export {
-  loadAbi,
   isValidAddress,
   filterStateChangingFunctions,
-  getAvailableFunctions,
   getFunctionSignature,
   findFunctionBySignature,
   findFunctionsByName,
-} from './core/abi-loader';
+} from './core/abi-utils';
 
 // Core - Calldata Encoder
 export {
@@ -48,7 +44,6 @@ export {
 // Core - Action Builder
 export {
   buildAction,
-  buildActionFromPredefined,
   ActionBuilder,
 } from './core/action-builder';
 
@@ -86,3 +81,17 @@ export {
   governorMethods,
   uupsMethods,
 } from './predefined';
+
+// React Hooks
+export {
+  useParameterValidation,
+  useActionBuilder,
+} from './hooks';
+
+export type {
+  UseParameterValidationOptions,
+  UseParameterValidationReturn,
+  ParameterState,
+  UseActionBuilderOptions,
+  UseActionBuilderReturn,
+} from './hooks';

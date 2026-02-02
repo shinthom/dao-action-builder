@@ -1,21 +1,16 @@
 import { useState, useCallback, useMemo, useEffect } from 'react';
 import type {
-  ActionBuilderConfig,
   AbiFunction,
   Action,
-  LoadAbiResult,
 } from '../types';
 import { ActionBuilderError } from '../types';
-import { useAbiLoader } from './useAbiLoader';
 import { useParameterValidation } from './useParameterValidation';
 import { encodeCalldata } from '../core/calldata-encoder';
-import { decodeCalldata } from '../core/calldata-decoder';
-import { getFunctionSignature, findFunctionBySignature, getAvailableFunctions } from '../core/abi-loader';
+import { getFunctionSignature, findFunctionBySignature, isValidAddress } from '../core/abi-utils';
 
 export interface UseActionBuilderOptions {
-  config: ActionBuilderConfig;
-  /** Debounce time for address input */
-  debounceMs?: number;
+  /** Contract ABI (required) */
+  abi: AbiFunction[];
   /** Initial contract address */
   initialAddress?: string;
   /** Initial function signature */
@@ -29,14 +24,9 @@ export interface UseActionBuilderReturn {
   address: string;
   setAddress: (address: string) => void;
   isValidAddress: boolean;
-  isLoadingAbi: boolean;
-  abiError: ActionBuilderError | null;
 
   // ABI info
-  abiResult: LoadAbiResult | null;
   availableFunctions: AbiFunction[];
-  isProxy: boolean;
-  implementationAddress: string | undefined;
 
   // Function selection
   selectedFunction: AbiFunction | null;
@@ -78,29 +68,23 @@ export interface UseActionBuilderReturn {
  */
 export function useActionBuilder(options: UseActionBuilderOptions): UseActionBuilderReturn {
   const {
-    config,
-    debounceMs = 500,
+    abi,
     initialAddress = '',
     initialFunction = '',
     initialParameters = {},
   } = options;
 
-  // ABI loading
-  const abiLoader = useAbiLoader({
-    config,
-    autoLoad: true,
-    debounceMs,
-  });
+  // Address state
+  const [address, setAddress] = useState(initialAddress);
 
   // Function selection
   const [selectedFunctionSignature, setSelectedFunctionSignature] = useState(initialFunction);
 
   // Find selected function
   const selectedFunction = useMemo(() => {
-    if (!abiLoader.abiResult || !selectedFunctionSignature) return null;
-    const allFunctions = getAvailableFunctions(abiLoader.abiResult);
-    return findFunctionBySignature(selectedFunctionSignature, allFunctions) || null;
-  }, [abiLoader.abiResult, selectedFunctionSignature]);
+    if (!selectedFunctionSignature) return null;
+    return findFunctionBySignature(selectedFunctionSignature, abi) || null;
+  }, [abi, selectedFunctionSignature]);
 
   // Parameter validation
   const paramValidation = useParameterValidation({
@@ -113,13 +97,6 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
   const [calldata, setCalldata] = useState('');
   const [calldataError, setCalldataError] = useState<ActionBuilderError | null>(null);
 
-  // Set initial address
-  useEffect(() => {
-    if (initialAddress) {
-      abiLoader.setAddress(initialAddress);
-    }
-  }, []);
-
   // Generate calldata when parameters change
   useEffect(() => {
     if (!selectedFunction || !paramValidation.isComplete || !paramValidation.isValid) {
@@ -128,12 +105,8 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
       return;
     }
 
-    const allFunctions = abiLoader.abiResult
-      ? getAvailableFunctions(abiLoader.abiResult)
-      : [];
-
     const result = encodeCalldata({
-      abi: allFunctions,
+      abi,
       functionSignature: selectedFunctionSignature,
       parameters: paramValidation.values,
     });
@@ -151,7 +124,7 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
     paramValidation.values,
     paramValidation.isComplete,
     paramValidation.isValid,
-    abiLoader.abiResult,
+    abi,
   ]);
 
   // Reset parameters when function changes
@@ -163,10 +136,12 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
     setSelectedFunctionSignature(signature);
   }, []);
 
+  const addressIsValid = useMemo(() => isValidAddress(address), [address]);
+
   const buildAction = useCallback((): Action | null => {
     if (
-      !abiLoader.address ||
-      !abiLoader.isValidAddress ||
+      !address ||
+      !addressIsValid ||
       !selectedFunction ||
       !calldata ||
       !paramValidation.isValid ||
@@ -176,15 +151,15 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
     }
 
     return {
-      contractAddress: abiLoader.address.toLowerCase(),
+      contractAddress: address.toLowerCase(),
       functionSignature: selectedFunctionSignature,
       functionName: selectedFunction.name,
       calldata,
       abi: [selectedFunction],
     };
   }, [
-    abiLoader.address,
-    abiLoader.isValidAddress,
+    address,
+    addressIsValid,
     selectedFunction,
     selectedFunctionSignature,
     calldata,
@@ -194,7 +169,7 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
 
   const canBuildAction = useMemo(() => {
     return (
-      abiLoader.isValidAddress &&
+      addressIsValid &&
       !!selectedFunction &&
       !!calldata &&
       paramValidation.isValid &&
@@ -202,7 +177,7 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
       !calldataError
     );
   }, [
-    abiLoader.isValidAddress,
+    addressIsValid,
     selectedFunction,
     calldata,
     paramValidation.isValid,
@@ -211,12 +186,12 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
   ]);
 
   const reset = useCallback(() => {
-    abiLoader.reset();
+    setAddress('');
     setSelectedFunctionSignature('');
     setCalldata('');
     setCalldataError(null);
     paramValidation.reset();
-  }, [abiLoader, paramValidation]);
+  }, [paramValidation]);
 
   const resetParameters = useCallback(() => {
     paramValidation.reset();
@@ -226,17 +201,12 @@ export function useActionBuilder(options: UseActionBuilderOptions): UseActionBui
 
   return {
     // Address handling
-    address: abiLoader.address,
-    setAddress: abiLoader.setAddress,
-    isValidAddress: abiLoader.isValidAddress,
-    isLoadingAbi: abiLoader.isLoading,
-    abiError: abiLoader.error,
+    address,
+    setAddress,
+    isValidAddress: addressIsValid,
 
     // ABI info
-    abiResult: abiLoader.abiResult,
-    availableFunctions: abiLoader.availableFunctions,
-    isProxy: abiLoader.isProxy,
-    implementationAddress: abiLoader.implementationAddress,
+    availableFunctions: abi,
 
     // Function selection
     selectedFunction,

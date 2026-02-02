@@ -1,16 +1,12 @@
 import { useState, useEffect, useMemo } from 'react';
 import {
-  loadAbi,
   encodeCalldata,
   decodeCalldata,
   validateParameterType,
   getParameterTypeErrorMessage,
   predefinedMethodRegistry,
   getFunctionSignature,
-  getAvailableFunctions,
-  type ActionBuilderConfig,
   type AbiFunction,
-  type LoadAbiResult,
   type PredefinedMethod,
 } from '@dao-action-builder/core';
 import { registerTokamakMethods } from '@dao-action-builder/tokamak';
@@ -18,22 +14,9 @@ import { registerTokamakMethods } from '@dao-action-builder/tokamak';
 // Register Tokamak methods
 registerTokamakMethods();
 
-type TabType = 'etherscan' | 'predefined';
-
 function App() {
-  // Config
-  const [apiKey, setApiKey] = useState('');
-  const [chainId, setChainId] = useState('1');
-  const [rpcUrl, setRpcUrl] = useState('');
-
-  // Tab selection
-  const [activeTab, setActiveTab] = useState<TabType>('predefined');
-
-  // Etherscan ABI loading
+  // Contract address
   const [contractAddress, setContractAddress] = useState('');
-  const [isLoadingAbi, setIsLoadingAbi] = useState(false);
-  const [abiResult, setAbiResult] = useState<LoadAbiResult | null>(null);
-  const [abiError, setAbiError] = useState<string | null>(null);
 
   // Predefined methods
   const [selectedPredefined, setSelectedPredefined] = useState<PredefinedMethod | null>(null);
@@ -52,52 +35,13 @@ function App() {
   const [calldataError, setCalldataError] = useState<string | null>(null);
   const [decodedResult, setDecodedResult] = useState<Record<string, string> | null>(null);
 
-  // Available functions based on mode
+  // Available functions based on selected predefined method
   const availableFunctions = useMemo(() => {
-    if (activeTab === 'predefined' && selectedPredefined) {
+    if (selectedPredefined) {
       return selectedPredefined.abi;
     }
-    if (activeTab === 'etherscan' && abiResult) {
-      return getAvailableFunctions(abiResult);
-    }
     return [];
-  }, [activeTab, selectedPredefined, abiResult]);
-
-  // Config object
-  const config: ActionBuilderConfig = useMemo(
-    () => ({
-      etherscan: {
-        apiKey,
-        chainId: parseInt(chainId, 10),
-      },
-      rpc: rpcUrl ? { url: rpcUrl } : undefined,
-    }),
-    [apiKey, chainId, rpcUrl]
-  );
-
-  // Load ABI from Etherscan
-  const handleLoadAbi = async () => {
-    if (!contractAddress || !apiKey) return;
-
-    setIsLoadingAbi(true);
-    setAbiError(null);
-    setAbiResult(null);
-    setSelectedFunction(null);
-    setSelectedFunctionSig('');
-    setParamValues({});
-    setParamErrors({});
-    setCalldata('');
-
-    const result = await loadAbi(contractAddress, config);
-
-    setIsLoadingAbi(false);
-
-    if (result.success) {
-      setAbiResult(result.data);
-    } else {
-      setAbiError(result.error.message);
-    }
-  };
+  }, [selectedPredefined]);
 
   // Handle function selection
   const handleFunctionSelect = (signature: string) => {
@@ -184,7 +128,7 @@ function App() {
     }
   }, [selectedFunction, selectedFunctionSig, paramValues, paramErrors, availableFunctions]);
 
-  // Reset when switching tabs
+  // Reset when selecting new predefined method
   useEffect(() => {
     setSelectedFunction(null);
     setSelectedFunctionSig('');
@@ -193,154 +137,48 @@ function App() {
     setCalldata('');
     setCalldataError(null);
     setDecodedResult(null);
-  }, [activeTab]);
+  }, [selectedPredefined]);
 
   return (
     <div className="container">
       <h1>DAO Action Builder Demo</h1>
       <p className="subtitle">
-        Test the @dao-action-builder/core library - load ABIs, validate parameters, and encode calldata
+        Test the @dao-action-builder/core library - validate parameters and encode calldata
       </p>
 
-      {/* Configuration */}
-      <div className="config-section">
-        <h3>Configuration (for Etherscan ABI loading)</h3>
-        <div className="row">
-          <div className="col">
+      {/* Predefined Methods Selection */}
+      <div className="card">
+        <h2>Select Predefined Method</h2>
+        <div className="predefined-grid">
+          {predefinedMethods.map((method) => (
+            <div
+              key={method.id}
+              className={`predefined-item ${selectedPredefined?.id === method.id ? 'selected' : ''}`}
+              onClick={() => {
+                setSelectedPredefined(method);
+              }}
+            >
+              <div className="name">{method.name}</div>
+              <div className="desc">{method.description}</div>
+            </div>
+          ))}
+        </div>
+
+        {selectedPredefined && (
+          <>
+            <div className="divider" />
             <div className="form-group">
-              <label>Etherscan API Key</label>
+              <label>Contract Address (for the action)</label>
               <input
                 type="text"
-                value={apiKey}
-                onChange={(e) => setApiKey(e.target.value)}
-                placeholder="Enter your Etherscan API key"
+                value={contractAddress}
+                onChange={(e) => setContractAddress(e.target.value)}
+                placeholder="0x..."
               />
             </div>
-          </div>
-          <div className="col">
-            <div className="form-group">
-              <label>Chain ID</label>
-              <select value={chainId} onChange={(e) => setChainId(e.target.value)}>
-                <option value="1">Ethereum Mainnet (1)</option>
-                <option value="11155111">Sepolia (11155111)</option>
-                <option value="137">Polygon (137)</option>
-                <option value="42161">Arbitrum (42161)</option>
-              </select>
-            </div>
-          </div>
-        </div>
-        <div className="form-group">
-          <label>RPC URL (optional, for proxy detection)</label>
-          <input
-            type="text"
-            value={rpcUrl}
-            onChange={(e) => setRpcUrl(e.target.value)}
-            placeholder="https://eth-mainnet.g.alchemy.com/v2/YOUR_KEY"
-          />
-          <div className="help-text">Required for automatic proxy implementation detection</div>
-        </div>
+          </>
+        )}
       </div>
-
-      {/* Tabs */}
-      <div className="tabs">
-        <button
-          className={`tab ${activeTab === 'predefined' ? 'active' : ''}`}
-          onClick={() => setActiveTab('predefined')}
-        >
-          Predefined Methods
-        </button>
-        <button
-          className={`tab ${activeTab === 'etherscan' ? 'active' : ''}`}
-          onClick={() => setActiveTab('etherscan')}
-        >
-          Load from Etherscan
-        </button>
-      </div>
-
-      {/* Predefined Methods Tab */}
-      {activeTab === 'predefined' && (
-        <div className="card">
-          <h2>Select Predefined Method</h2>
-          <div className="predefined-grid">
-            {predefinedMethods.map((method) => (
-              <div
-                key={method.id}
-                className={`predefined-item ${selectedPredefined?.id === method.id ? 'selected' : ''}`}
-                onClick={() => {
-                  setSelectedPredefined(method);
-                  setSelectedFunction(null);
-                  setSelectedFunctionSig('');
-                }}
-              >
-                <div className="name">{method.name}</div>
-                <div className="desc">{method.description}</div>
-              </div>
-            ))}
-          </div>
-
-          {selectedPredefined && (
-            <>
-              <div className="divider" />
-              <div className="form-group">
-                <label>Contract Address (for the action)</label>
-                <input
-                  type="text"
-                  value={contractAddress}
-                  onChange={(e) => setContractAddress(e.target.value)}
-                  placeholder="0x..."
-                />
-              </div>
-            </>
-          )}
-        </div>
-      )}
-
-      {/* Etherscan Tab */}
-      {activeTab === 'etherscan' && (
-        <div className="card">
-          <h2>Load ABI from Etherscan</h2>
-          <div className="row">
-            <div className="col">
-              <div className="form-group">
-                <label>Contract Address</label>
-                <input
-                  type="text"
-                  value={contractAddress}
-                  onChange={(e) => setContractAddress(e.target.value)}
-                  placeholder="0x..."
-                />
-              </div>
-            </div>
-            <div className="col" style={{ flex: '0 0 auto' }}>
-              <div className="form-group">
-                <label>&nbsp;</label>
-                <button
-                  className="btn btn-primary"
-                  onClick={handleLoadAbi}
-                  disabled={!contractAddress || !apiKey || isLoadingAbi}
-                >
-                  {isLoadingAbi ? 'Loading...' : 'Load ABI'}
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {isLoadingAbi && <span className="status loading">Loading ABI...</span>}
-          {abiError && <span className="status error">{abiError}</span>}
-          {abiResult && (
-            <div>
-              <span className="status success">
-                ABI loaded ({availableFunctions.length} functions)
-              </span>
-              {abiResult.isProxy && (
-                <span className="status proxy" style={{ marginLeft: 8 }}>
-                  Proxy detected
-                </span>
-              )}
-            </div>
-          )}
-        </div>
-      )}
 
       {/* Function Selection */}
       {availableFunctions.length > 0 && (

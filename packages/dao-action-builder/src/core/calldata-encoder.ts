@@ -7,7 +7,7 @@ import type {
 } from '../types';
 import { ActionBuilderError, ActionBuilderErrorCode } from '../types';
 import { prepareParametersForEncoding } from '../validation/normalizers';
-import { getFunctionSignature, findFunctionBySignature } from './abi-loader';
+import { getFunctionSignature, findFunctionBySignature } from './abi-utils';
 
 /**
  * Encode calldata for a function call

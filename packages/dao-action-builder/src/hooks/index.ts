@@ -1,6 +1,3 @@
-export { useAbiLoader } from './useAbiLoader';
-export type { UseAbiLoaderOptions, UseAbiLoaderReturn } from './useAbiLoader';
-
 export { useParameterValidation } from './useParameterValidation';
 export type {
   UseParameterValidationOptions,
