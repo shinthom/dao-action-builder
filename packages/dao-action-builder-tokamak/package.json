@@ -1,7 +1,7 @@
 {
-  "name": "@dao-action-builder/tokamak",
+  "name": "@tokamak-network/dao-action-builder-tokamak",
   "version": "0.1.0",
-  "description": "Tokamak Network predefined methods for @dao-action-builder/core",
+  "description": "Tokamak Network predefined methods for @tokamak-network/dao-action-builder",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
@@ -28,12 +28,26 @@
     "tokamak",
     "ethereum",
     "ton",
-    "staking"
+    "wton",
+    "staking",
+    "governance"
   ],
-  "author": "",
+  "author": "Tokamak Network <thomas@tokamak.network>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tokamak-network/dao-action-builder.git",
+    "directory": "packages/dao-action-builder-tokamak"
+  },
+  "homepage": "https://github.com/tokamak-network/dao-action-builder#readme",
+  "bugs": {
+    "url": "https://github.com/tokamak-network/dao-action-builder/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "@dao-action-builder/core": "file:../dao-action-builder"
+    "@tokamak-network/dao-action-builder": "^0.1.0"
   },
   "devDependencies": {
     "@types/node": "^20.10.0",

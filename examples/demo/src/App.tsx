@@ -8,8 +8,8 @@ import {
   getFunctionSignature,
   type AbiFunction,
   type PredefinedMethod,
-} from '@dao-action-builder/core';
-import { registerTokamakMethods } from '@dao-action-builder/tokamak';
+} from '@tokamak-network/dao-action-builder';
+import { registerTokamakMethods } from '@tokamak-network/dao-action-builder-tokamak';
 
 // Register Tokamak methods
 registerTokamakMethods();

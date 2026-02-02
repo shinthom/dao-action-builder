@@ -1,5 +1,5 @@
-import type { PredefinedMethod } from '@dao-action-builder/core';
-import { predefinedMethodRegistry } from '@dao-action-builder/core';
+import type { PredefinedMethod } from '@tokamak-network/dao-action-builder';
+import { predefinedMethodRegistry } from '@tokamak-network/dao-action-builder';
 
 // Import all Tokamak methods
 import { tonMethods } from './methods/ton';

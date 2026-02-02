@@ -9,8 +9,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@dao-action-builder/core": "file:../../packages/dao-action-builder",
-    "@dao-action-builder/tokamak": "file:../../packages/dao-action-builder-tokamak",
+    "@tokamak-network/dao-action-builder": "file:../../packages/dao-action-builder",
+    "@tokamak-network/dao-action-builder-tokamak": "file:../../packages/dao-action-builder-tokamak",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
