@@ -1,0 +1,44 @@
+{
+  "name": "@dao-action-builder/tokamak",
+  "version": "0.1.0",
+  "description": "Tokamak Network predefined methods for @dao-action-builder/core",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src --ext .ts",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "dao",
+    "tokamak",
+    "ethereum",
+    "ton",
+    "staking"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@dao-action-builder/core": "file:../dao-action-builder"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "eslint": "^8.55.0",
+    "tsup": "^8.0.0",
+    "typescript": "^5.3.0"
+  }
+}

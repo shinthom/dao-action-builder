@@ -1,0 +1,131 @@
+import type { PredefinedMethod, AbiFunction } from '@dao-action-builder/core';
+
+const abi: AbiFunction[] = [
+  {
+    type: 'function',
+    name: 'updateSeigniorageLayer',
+    inputs: [{ name: 'layer2', type: 'address' }],
+    outputs: [{ name: '', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'pause',
+    inputs: [],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'unpause',
+    inputs: [],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setAdjustDelay',
+    inputs: [{ name: 'adjustDelay_', type: 'uint256' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setMinimumAmount',
+    inputs: [{ name: 'minimumAmount_', type: 'uint256' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'addAdmin',
+    inputs: [{ name: 'account', type: 'address' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'addMinter',
+    inputs: [{ name: 'account', type: 'address' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'grantRole',
+    inputs: [
+      { name: 'role', type: 'bytes32' },
+      { name: 'account', type: 'address' },
+    ],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setCoinageFactory',
+    inputs: [{ name: 'factory_', type: 'address' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setCommissionRate',
+    inputs: [
+      { name: 'layer2', type: 'address' },
+      { name: 'commissionRate', type: 'uint256' },
+      { name: 'isCommissionRateNegative_', type: 'bool' },
+    ],
+    outputs: [{ name: '', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setDao',
+    inputs: [{ name: 'daoAddress', type: 'address' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setData',
+    inputs: [
+      { name: 'powerton_', type: 'address' },
+      { name: 'daoAddress', type: 'address' },
+      { name: 'powerTONSeigRate_', type: 'uint256' },
+      { name: 'daoSeigRate_', type: 'uint256' },
+      { name: 'relativeSeigRate_', type: 'uint256' },
+      { name: 'adjustDelay_', type: 'uint256' },
+      { name: 'minimumAmount_', type: 'uint256' },
+    ],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'setPowerTON',
+    inputs: [{ name: 'powerton_', type: 'address' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'transferAdmin',
+    inputs: [{ name: 'newAdmin', type: 'address' }],
+    outputs: [],
+    stateMutability: 'nonpayable',
+  },
+  {
+    type: 'function',
+    name: 'updateSeigniorage',
+    inputs: [],
+    outputs: [{ name: '', type: 'bool' }],
+    stateMutability: 'nonpayable',
+  },
+];
+
+export const seigManagerMethods: PredefinedMethod = {
+  id: 'tokamak-seig-manager',
+  name: 'Tokamak SeigManager',
+  description: 'Tokamak Network staking rewards manager',
+  abi,
+};
