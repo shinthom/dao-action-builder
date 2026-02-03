@@ -168,6 +168,52 @@ predefinedMethodRegistry.register({
 });
 ```
 
+## Tokamak Network Contracts
+
+Pre-configured contract addresses for Tokamak Network. Access addresses directly from the predefined methods:
+
+```typescript
+import { tonMethods, wtonMethods, daoCommitteeMethods } from '@tokamak-ecosystem/dao-action-builder';
+
+// Get addresses
+const tonMainnet = tonMethods.addresses?.mainnet;
+const tonSepolia = tonMethods.addresses?.sepolia;
+```
+
+### Contract Addresses
+
+#### Mainnet
+
+| Contract | Address |
+|----------|---------|
+| TON | `0x2be5e8c109e2197D077D13A82dAead6a9b3433C5` |
+| WTON | `0xc4A11aaf6ea915Ed7Ac194161d2fC9384F15bff2` |
+| DAOCommittee | `0xDD9f0cCc044B0781289Ee318e5971b0139602C26` |
+| DAOAgendaManager | `0xcD4421d082752f363E1687544a09d5112cD4f484` |
+| DAOVault | `0x2520CD65BAa2cEEe9E6Ad6EBD3F45490C42dd303` |
+| SeigManager | `0x0b55a0f463b6defb81c6063973763951712d0e5f` |
+| DepositManager | `0x0b58ca72b12f01fc05f8f252e226f3e2089bd00e` |
+| CandidateFactory | `0x9fc7100a16407ee24a79c834a56e6eca555a5d7c` |
+| Layer2Registry | `0x7846c2248a7b4de77e9c2bae7fbb93bfc286837b` |
+| Layer2Manager | `0xD6Bf6B2b7553c8064Ba763AD6989829060FdFC1D` |
+| L1BridgeRegistry | `0x39d43281A4A5e922AB0DCf89825D73273D8C5BA4` |
+
+#### Sepolia
+
+| Contract | Address |
+|----------|---------|
+| TON | `0xa30fe40285B8f5c0457DbC3B7C8A280373c40044` |
+| WTON | `0x79E0d92670106c85E9067b56B8F674340dCa0Bbd` |
+| DAOCommittee | `0x79cfbEaCB5470bBe3B8Fe76db2A61Fc59e588C38` |
+| DAOAgendaManager | `0x1444f7a8bC26a3c9001a13271D56d6fF36B44f08` |
+| DAOVault | `0xB9F6c9E75418D7E5a536ADe08f0218196BB3eBa4` |
+| SeigManager | `0x11F6f1C2c0800AC1b31F04fF8A9f5D9003a85460` |
+| DepositManager | `0x90ffcc7F168DceDBEF1Cb6c6eB00cA73F922956F` |
+| CandidateFactory | `0x04e3C2B720FB8896A7f9Ea59DdcA85fD45189C7f` |
+| Layer2Registry | `0xA0a9576b437E52114aDA8b0BC4149F2F5c604581` |
+| Layer2Manager | `0x58B4C2FEf19f5CDdd944AadD8DC99cCC71bfeFDc` |
+| L1BridgeRegistry | `0x2D47fa57101203855b336e9E61BC9da0A6dd0Dbc` |
+
 ## API Reference
 
 ### Core Functions
