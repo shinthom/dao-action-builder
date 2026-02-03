@@ -125,7 +125,10 @@ export {
   tonMethods,
   wtonMethods,
   depositManagerMethods,
-  seigManagerMethods,
   l1BridgeRegistryMethods,
   layer2ManagerMethods,
+  daoCommitteeMethods,
+  daoAgendaManagerMethods,
+  daoVaultMethods,
+  layer2RegistryMethods,
 } from './tokamak';

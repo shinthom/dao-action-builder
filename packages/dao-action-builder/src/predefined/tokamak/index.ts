@@ -5,17 +5,23 @@ import { predefinedMethodRegistry } from '../index';
 import { tonMethods } from './ton';
 import { wtonMethods } from './wton';
 import { depositManagerMethods } from './deposit-manager';
-import { seigManagerMethods } from './seig-manager';
 import { l1BridgeRegistryMethods } from './l1-bridge-registry';
 import { layer2ManagerMethods } from './layer2-manager';
+import { daoCommitteeMethods } from './dao-committee';
+import { daoAgendaManagerMethods } from './dao-agenda-manager';
+import { daoVaultMethods } from './dao-vault';
+import { layer2RegistryMethods } from './layer2-registry';
 
 // Export individual methods
 export { tonMethods } from './ton';
 export { wtonMethods } from './wton';
 export { depositManagerMethods } from './deposit-manager';
-export { seigManagerMethods } from './seig-manager';
 export { l1BridgeRegistryMethods } from './l1-bridge-registry';
 export { layer2ManagerMethods } from './layer2-manager';
+export { daoCommitteeMethods } from './dao-committee';
+export { daoAgendaManagerMethods } from './dao-agenda-manager';
+export { daoVaultMethods } from './dao-vault';
+export { layer2RegistryMethods } from './layer2-registry';
 
 /**
  * All Tokamak predefined methods
@@ -24,9 +30,12 @@ export const tokamakMethods: PredefinedMethod[] = [
   tonMethods,
   wtonMethods,
   depositManagerMethods,
-  seigManagerMethods,
   l1BridgeRegistryMethods,
   layer2ManagerMethods,
+  daoCommitteeMethods,
+  daoAgendaManagerMethods,
+  daoVaultMethods,
+  layer2RegistryMethods,
 ];
 
 /**
