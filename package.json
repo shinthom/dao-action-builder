@@ -7,8 +7,14 @@
   "scripts": {
     "build": "pnpm -r build",
     "test": "pnpm -r test",
+    "test:run": "pnpm -r test:run",
     "lint": "pnpm -r lint",
-    "clean": "pnpm -r clean"
+    "clean": "pnpm -r clean",
+    "publish": "./scripts/publish.sh -t patch",
+    "publish:patch": "./scripts/publish.sh -t patch",
+    "publish:minor": "./scripts/publish.sh -t minor",
+    "publish:major": "./scripts/publish.sh -t major",
+    "publish:dry": "./scripts/publish.sh --dry-run"
   },
   "devDependencies": {
     "typescript": "^5.3.0"
