@@ -92,15 +92,3 @@ export function buildAction(
 
   return { success: true, data: action };
 }
-
-/**
- * ActionBuilder class for more complex workflows
- */
-export class ActionBuilder {
-  /**
-   * Build an action
-   */
-  build(input: BuildActionInput): Result<Action, ActionBuilderError> {
-    return buildAction(input);
-  }
-}

@@ -5,6 +5,13 @@ import type {
   ParsedType,
 } from '../types';
 
+// Cached regex patterns for performance
+const ADDRESS_REGEX = /^0x[a-f0-9]{40}$/;
+const HEX_STRING_REGEX = /^0x[0-9a-fA-F]*$/;
+const ARRAY_TYPE_REGEX = /^(.+?)(\[.*\])$/;
+const ARRAY_DIMENSION_REGEX = /\[(\d*)\]/g;
+const FIXED_DIMENSION_REGEX = /\[(\d+)\]/;
+
 /**
  * Parse a Solidity type string into its components
  */
@@ -23,16 +30,16 @@ export function parseType(type: string): ParsedType {
   }
 
   // Extract array dimensions
-  const arrayMatch = type.match(/^(.+?)(\[.*\])$/);
+  const arrayMatch = type.match(ARRAY_TYPE_REGEX);
   if (arrayMatch) {
     result.baseType = arrayMatch[1];
     result.isArray = true;
 
     // Parse array dimensions
     const dimensionStr = arrayMatch[2];
-    const dimensions = dimensionStr.match(/\[(\d*)\]/g) || [];
+    const dimensions = dimensionStr.match(ARRAY_DIMENSION_REGEX) || [];
     result.arrayDimensions = dimensions.map((dim) => {
-      const numMatch = dim.match(/\[(\d+)\]/);
+      const numMatch = dim.match(FIXED_DIMENSION_REGEX);
       return numMatch ? parseInt(numMatch[1], 10) : null;
     });
 
@@ -53,7 +60,7 @@ export function validateAddress(value: string): ParameterValidationResult {
   }
 
   const lowerValue = value.toLowerCase();
-  const isValid = /^0x[a-f0-9]{40}$/.test(lowerValue);
+  const isValid = ADDRESS_REGEX.test(lowerValue);
 
   if (!isValid) {
     return {
@@ -139,7 +146,7 @@ export function validateBytes(value: string, fixedLength?: number): ParameterVal
     return { isValid: false, error: 'Must start with 0x' };
   }
 
-  if (!/^0x[0-9a-fA-F]*$/.test(value)) {
+  if (!HEX_STRING_REGEX.test(value)) {
     return { isValid: false, error: 'Invalid hex string' };
   }
 

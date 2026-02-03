@@ -44,10 +44,7 @@ export {
 } from './core/calldata-decoder';
 
 // Core - Action Builder
-export {
-  buildAction,
-  ActionBuilder,
-} from './core/action-builder';
+export { buildAction } from './core/action-builder';
 
 // Validation
 export {

@@ -1,10 +1,13 @@
 import type { AbiFunction } from '../types';
 
+// Cached regex patterns for performance
+const ADDRESS_REGEX = /^0x[a-fA-F0-9]{40}$/;
+
 /**
  * Check if an address is a valid Ethereum address
  */
 export function isValidAddress(address: string): boolean {
-  return /^0x[a-fA-F0-9]{40}$/.test(address);
+  return ADDRESS_REGEX.test(address);
 }
 
 /**
