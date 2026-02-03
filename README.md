@@ -134,7 +134,11 @@ Manages Layer 2 registration.
 ## Installation
 
 ```bash
-npm install @tokamak-network/dao-action-builder
+npm install @tokamak-ecosystem/dao-action-builder ethers
+# or
+pnpm add @tokamak-ecosystem/dao-action-builder ethers
+# or
+yarn add @tokamak-ecosystem/dao-action-builder ethers
 ```
 
 ## Reference
