@@ -12,8 +12,8 @@ Self-governance functions for the DAO Committee.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0xDD9f0cCc044B0781289Ee318e5971b0139602C26` |
-| Sepolia | `0x79cfbEaCB5470bBe3B8Fe76db2A61Fc59e588C38` |
+| Mainnet | [`0xDD9f0cCc044B0781289Ee318e5971b0139602C26`](https://etherscan.io/address/0xDD9f0cCc044B0781289Ee318e5971b0139602C26) |
+| Sepolia | [`0x79cfbEaCB5470bBe3B8Fe76db2A61Fc59e588C38`](https://sepolia.etherscan.io/address/0x79cfbEaCB5470bBe3B8Fe76db2A61Fc59e588C38) |
 
 | Function | Description |
 |----------|-------------|
@@ -46,8 +46,8 @@ Manages DAO proposals and voting.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0xcD4421d082752f363E1687544a09d5112cD4f484` |
-| Sepolia | `0x1444f7a8bC26a3c9001a13271D56d6fF36B44f08` |
+| Mainnet | [`0xcD4421d082752f363E1687544a09d5112cD4f484`](https://etherscan.io/address/0xcD4421d082752f363E1687544a09d5112cD4f484) |
+| Sepolia | [`0x1444f7a8bC26a3c9001a13271D56d6fF36B44f08`](https://sepolia.etherscan.io/address/0x1444f7a8bC26a3c9001a13271D56d6fF36B44f08) |
 
 | Function | Description |
 |----------|-------------|
@@ -71,8 +71,8 @@ Manages the DAO treasury.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x2520CD65BAa2cEEe9E6Ad6EBD3F45490C42dd303` |
-| Sepolia | `0xB9F6c9E75418D7E5a536ADe08f0218196BB3eBa4` |
+| Mainnet | [`0x2520CD65BAa2cEEe9E6Ad6EBD3F45490C42dd303`](https://etherscan.io/address/0x2520CD65BAa2cEEe9E6Ad6EBD3F45490C42dd303) |
+| Sepolia | [`0xB9F6c9E75418D7E5a536ADe08f0218196BB3eBa4`](https://sepolia.etherscan.io/address/0xB9F6c9E75418D7E5a536ADe08f0218196BB3eBa4) |
 
 | Function | Description |
 |----------|-------------|
@@ -93,8 +93,8 @@ Tokamak Network native token.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x2be5e8c109e2197D077D13A82dAead6a9b3433C5` |
-| Sepolia | `0xa30fe40285B8f5c0457DbC3B7C8A280373c40044` |
+| Mainnet | [`0x2be5e8c109e2197D077D13A82dAead6a9b3433C5`](https://etherscan.io/address/0x2be5e8c109e2197D077D13A82dAead6a9b3433C5) |
+| Sepolia | [`0xa30fe40285B8f5c0457DbC3B7C8A280373c40044`](https://sepolia.etherscan.io/address/0xa30fe40285B8f5c0457DbC3B7C8A280373c40044) |
 
 | Function | Description |
 |----------|-------------|
@@ -111,8 +111,8 @@ Wrapped TON token with swap functionality.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0xc4A11aaf6ea915Ed7Ac194161d2fC9384F15bff2` |
-| Sepolia | `0x79E0d92670106c85E9067b56B8F674340dCa0Bbd` |
+| Mainnet | [`0xc4A11aaf6ea915Ed7Ac194161d2fC9384F15bff2`](https://etherscan.io/address/0xc4A11aaf6ea915Ed7Ac194161d2fC9384F15bff2) |
+| Sepolia | [`0x79E0d92670106c85E9067b56B8F674340dCa0Bbd`](https://sepolia.etherscan.io/address/0x79E0d92670106c85E9067b56B8F674340dCa0Bbd) |
 
 | Function | Description |
 |----------|-------------|
@@ -137,8 +137,8 @@ Manages seigniorage distribution for staking.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x0b55a0f463b6defb81c6063973763951712d0e5f` |
-| Sepolia | `0x11F6f1C2c0800AC1b31F04fF8A9f5D9003a85460` |
+| Mainnet | [`0x0b55a0f463b6defb81c6063973763951712d0e5f`](https://etherscan.io/address/0x0b55a0f463b6defb81c6063973763951712d0e5f) |
+| Sepolia | [`0x11F6f1C2c0800AC1b31F04fF8A9f5D9003a85460`](https://sepolia.etherscan.io/address/0x11F6f1C2c0800AC1b31F04fF8A9f5D9003a85460) |
 
 **Configuration Functions:**
 
@@ -190,8 +190,8 @@ Manages staking deposits.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x0b58ca72b12f01fc05f8f252e226f3e2089bd00e` |
-| Sepolia | `0x90ffcc7F168DceDBEF1Cb6c6eB00cA73F922956F` |
+| Mainnet | [`0x0b58ca72b12f01fc05f8f252e226f3e2089bd00e`](https://etherscan.io/address/0x0b58ca72b12f01fc05f8f252e226f3e2089bd00e) |
+| Sepolia | [`0x90ffcc7F168DceDBEF1Cb6c6eB00cA73F922956F`](https://sepolia.etherscan.io/address/0x90ffcc7F168DceDBEF1Cb6c6eB00cA73F922956F) |
 
 | Function | Description |
 |----------|-------------|
@@ -209,8 +209,8 @@ Manages L1 bridges and candidate add-ons.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x39d43281A4A5e922AB0DCf89825D73273D8C5BA4` |
-| Sepolia | `0x2D47fa57101203855b336e9E61BC9da0A6dd0Dbc` |
+| Mainnet | [`0x39d43281A4A5e922AB0DCf89825D73273D8C5BA4`](https://etherscan.io/address/0x39d43281A4A5e922AB0DCf89825D73273D8C5BA4) |
+| Sepolia | [`0x2D47fa57101203855b336e9E61BC9da0A6dd0Dbc`](https://sepolia.etherscan.io/address/0x2D47fa57101203855b336e9E61BC9da0A6dd0Dbc) |
 
 **Configuration Functions:**
 
@@ -241,8 +241,8 @@ Manages Layer 2 networks.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0xD6Bf6B2b7553c8064Ba763AD6989829060FdFC1D` |
-| Sepolia | `0x58B4C2FEf19f5CDdd944AadD8DC99cCC71bfeFDc` |
+| Mainnet | [`0xD6Bf6B2b7553c8064Ba763AD6989829060FdFC1D`](https://etherscan.io/address/0xD6Bf6B2b7553c8064Ba763AD6989829060FdFC1D) |
+| Sepolia | [`0x58B4C2FEf19f5CDdd944AadD8DC99cCC71bfeFDc`](https://sepolia.etherscan.io/address/0x58B4C2FEf19f5CDdd944AadD8DC99cCC71bfeFDc) |
 
 | Function | Description |
 |----------|-------------|
@@ -261,8 +261,8 @@ Manages Layer 2 registration.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x7846c2248a7b4de77e9c2bae7fbb93bfc286837b` |
-| Sepolia | `0xA0a9576b437E52114aDA8b0BC4149F2F5c604581` |
+| Mainnet | [`0x7846c2248a7b4de77e9c2bae7fbb93bfc286837b`](https://etherscan.io/address/0x7846c2248a7b4de77e9c2bae7fbb93bfc286837b) |
+| Sepolia | [`0xA0a9576b437E52114aDA8b0BC4149F2F5c604581`](https://sepolia.etherscan.io/address/0xA0a9576b437E52114aDA8b0BC4149F2F5c604581) |
 
 | Function | Description |
 |----------|-------------|
@@ -283,8 +283,8 @@ Factory contract for deploying candidate contracts.
 
 | Network | Address |
 |---------|---------|
-| Mainnet | `0x9fc7100a16407ee24a79c834a56e6eca555a5d7c` |
-| Sepolia | `0x04e3C2B720FB8896A7f9Ea59DdcA85fD45189C7f` |
+| Mainnet | [`0x9fc7100a16407ee24a79c834a56e6eca555a5d7c`](https://etherscan.io/address/0x9fc7100a16407ee24a79c834a56e6eca555a5d7c) |
+| Sepolia | [`0x04e3C2B720FB8896A7f9Ea59DdcA85fD45189C7f`](https://sepolia.etherscan.io/address/0x04e3C2B720FB8896A7f9Ea59DdcA85fD45189C7f) |
 
 | Function | Description |
 |----------|-------------|
