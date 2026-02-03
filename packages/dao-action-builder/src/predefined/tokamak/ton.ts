@@ -50,4 +50,8 @@ export const tonMethods: PredefinedMethod = {
   name: 'Tokamak TON',
   description: 'Tokamak Network TON token interface',
   abi,
+  addresses: {
+    mainnet: '0x2be5e8c109e2197D077D13A82dAead6a9b3433C5',
+    sepolia: '0xa30fe40285B8f5c0457DbC3B7C8A280373c40044',
+  },
 };

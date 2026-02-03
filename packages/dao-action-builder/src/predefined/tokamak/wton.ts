@@ -121,4 +121,8 @@ export const wtonMethods: PredefinedMethod = {
   name: 'Tokamak WTON',
   description: 'Tokamak Network Wrapped TON token interface',
   abi,
+  addresses: {
+    mainnet: '0xc4A11aaf6ea915Ed7Ac194161d2fC9384F15bff2',
+    sepolia: '0x79E0d92670106c85E9067b56B8F674340dCa0Bbd',
+  },
 };
