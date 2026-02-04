@@ -17,6 +17,7 @@ import {
   layer2RegistryMethods,
   candidateFactoryMethods,
   type AbiFunction,
+  type AbiParameter,
   type PredefinedMethod,
   type NetworkType,
 } from '@tokamak-ecosystem/dao-action-builder';
@@ -140,7 +141,7 @@ function App() {
   // Handle function selection
   const handleFunctionSelect = (signature: string) => {
     setSelectedFunctionSig(signature);
-    const func = availableFunctions.find((f) => getFunctionSignature(f) === signature);
+    const func = availableFunctions.find((f: AbiFunction) => getFunctionSignature(f) === signature);
     setSelectedFunction(func || null);
     setParamValues({});
     setParamErrors({});
@@ -186,7 +187,7 @@ function App() {
 
     // Check if all params are filled and valid
     const allFilled = selectedFunction.inputs.every(
-      (input) => paramValues[input.name]?.trim()
+      (input: AbiParameter) => paramValues[input.name]?.trim()
     );
     const hasErrors = Object.keys(paramErrors).length > 0;
 
@@ -323,7 +324,7 @@ function App() {
                       onChange={(e) => handleFunctionSelect(e.target.value)}
                     >
                       <option value="">-- Select a function --</option>
-                      {availableFunctions.map((func) => {
+                      {availableFunctions.map((func: AbiFunction) => {
                         const sig = getFunctionSignature(func);
                         return (
                           <option key={sig} value={sig}>
@@ -348,7 +349,7 @@ function App() {
                       </tr>
                     </thead>
                     <tbody>
-                      {selectedFunction.inputs.map((input) => (
+                      {selectedFunction.inputs.map((input: AbiParameter) => (
                         <tr key={input.name}>
                           <td>
                             <span className="param-name">{input.name}</span>
